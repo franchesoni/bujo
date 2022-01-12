@@ -22,18 +22,19 @@ def process_file(filename):
     delete_nested, indent_len = False, 0  # to know if we delete nested
 
     for ind, line in enumerate(lines):
+
         if len(line) < 1:  # remove if empty
             indices_to_remove.append(ind)
             delete_nested, indent_len = False, 0
-        elif delete_nested:
-            if indent_len < len(line) - len(line.lstrip(' ')):
+        elif delete_nested and indent_len < len(line) - len(line.lstrip(' ')):
                 indices_to_remove.append(ind)
-            else:
-                delete_nested, indent_len = False, 0
         # if not-bullet, skip
         elif line.lstrip(' ')[0] != '-':
             pass # could happen to mantain '[x] note without bullet'
         else:
+            if delete_nested:  # indentation level does not imply deletion
+                delete_nested, indent_len = False, 0
+
             aline = line.lstrip(' ')[1:].lstrip(' ')  # remove '-  '
             # if rep pattern, reset and remove symbol [x]
             if rep_task_regex_any.match(aline):
@@ -86,4 +87,4 @@ def run_migrate(filename=None, reset=False):
 
 
 if __name__ == '__main__':
-    run_migrate(reset= True)
+    run_migrate()
