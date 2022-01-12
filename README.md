@@ -21,3 +21,10 @@ You can also drop tasks `[-]` and count time in "Pomodoro units" `[..]` which wi
 Finally, you can set habits. Something like `- [x] 10x5 pushups` or `- [ ] 0x4 emails`. The counter will reset to 0 after migration.
 
 Credit to [this Go version](https://github.com/dballard/markdown-bullet-journal)
+
+## How I use it
+I wrote the following in my `.bashrc` file:
+```
+alias bujo="cd /home/franchesoni/mine/personal/planning/journal/; python3 migrate.py; vi "$(date '+%Y_%m_%d').md""
+```
+This line allows me to run `bujo` and automatically open today's entry :)
