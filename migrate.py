@@ -20,7 +20,6 @@ def process_file(filename):
     indices_to_remove = []  # we'll remove these lines
     output_lines = lines.copy()  # what we'll return 
     delete_nested, indent_len = False, 0  # to know if we delete nested
-
     for ind, line in enumerate(lines):
 
         if len(line) < 1:  # remove if empty
